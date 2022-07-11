@@ -1,0 +1,22 @@
+<div class="flex flex-col justify-center items-center p-5">
+  <h1 class="text-center py-10 font-bold text-3xl">Word Search Game</h1>
+  <div class="text-center flex flex-row">
+    <p *ngFor="let words of wordsToSearchArray" [ngClass]="foundWordArray.includes(words) ? 'line-through': ''"
+       class="p-3">
+      {{words}}
+    </p>
+  </div>
+  <div *ngIf="letterGrid">
+    <table class="border-2 border-spacing-2.5">
+      <tbody>
+      <tr *ngFor="let row of letterGrid; let rowNum = index;">
+        <td (mousedown)="mouseDown(letter, rowNum, colNum, $event)" (mouseenter)="selection(letter,rowNum, colNum, $event)"
+            (mouseup)="mouseUp($event, rowNum)" *ngFor="let letter of row; let colNum = index"
+            class="border border-slate-300 prevent-select p-2 cursor-pointer" [ngClass]="selectedIndexArrayObj[rowNum].col.includes(colNum) ? 'bg-yellow-400 line-through': ''">
+          {{letter}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
